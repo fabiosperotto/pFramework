@@ -1,40 +1,31 @@
 <?php
 /**
- * Handles the view functionality of our MVC framework
+ * Este model define a funcionalidade das views no nosso MVC
  */
 class View_Model
 {
-	/**
-	 * Holds variables assigned to template
-	 */
+	//array que guarda as variaveis que poderao ser utilizadas dentro da view
 	private $data = array();
 
-	/**
-	 * Holds render status of view.
-	 */
 	private $render = FALSE;
 
 	/**
-	 * Accept a template to load
+	 * aceita template ou view para carregar
 	 */
 	public function __construct($template)
 	{
-		//compose file name
+		//nome do arquivo
 		$file = SERVER_ROOT . '/app/views/' . strtolower($template) . '.php';
-	
+
 		if (file_exists($file))
 		{
-			/**
-			 * trigger render to include file when this model is destroyed
-			 * if we render it now, we wouldn't be able to assign variables
-			 * to the view!
-			 */
+
 			$this->render = $file;
 		}		
 	}
-	
+
 	/**
-	 * Receives assignments from controller and stores in local data array
+	 * Recebe atribuições do controlador de variavies para mostrar na view
 	 * 
 	 * @param $variable
 	 * @param $value
@@ -45,27 +36,26 @@ class View_Model
 	}
 
 	/**
-	 * Render the output directly to the page, or optionally, return the
-	 * generated output to caller.
+	 * Renderiza a view diretamente na pagina ou retorna a saida gerada
 	 * 
-	 * @param $direct_output Set to any non-TRUE value to have the 
-	 * output returned rather than displayed directly.
+	 * @param $direct_output Setado para nao-TRUE temos a view gerada
+	 * diretamente.
 	 */
 	public function render($direct_output = TRUE)
 	{
-		// Turn output buffering on, capturing all output
+		// captura todo o buffer de saida
 		if ($direct_output !== TRUE)
 		{
 			ob_start();
 		}
 
-		// Parse data variables into local variables
+		// variaveis de dados em variaveis locais
 		$data = $this->data;
-	
-		// Get template
+
+		// entao inclui a view/template
 		include($this->render);
-		
-		// Get the contents of the buffer and return it
+
+		// pega o conteudo do buffer e o retorna
 		if ($direct_output !== TRUE)
 		{
 			return ob_get_clean();
