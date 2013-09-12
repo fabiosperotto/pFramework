@@ -42,7 +42,8 @@
 		<h3>URL no pFramework</h3>
 		<p>
 			Por enquanto existem as duas formas abaixo. As variávies GET são divididas por 
-			barras ( / ) e não pelo caractere &. É meio zuera, eu sei. Experimente-os.
+			barras ( / ) e não pelo caractere &. É meio zuera, eu sei. O formato é controlador/variavel=valor. 
+			Experimente-os.
 			<ul>
 				<li>http://seudominio/pframework/index.php?main/nome=SeuNomeAqui</li>
 				<li>http://seudominio/pframework/?main/nome=SeuNomeAqui</li>
